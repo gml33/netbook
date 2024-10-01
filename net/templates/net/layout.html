@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="{% static 'net/css/bootstrap.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'net/css/font-awesome.min.css' %}"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+      integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+      crossorigin="anonymous"
+    />    
+    <script src="https://kit.fontawesome.com/f8407159fd.js" crossorigin="anonymous"></script>
+
+    <title>Api001</title>
+  </head>
+  <body style="background: #0F2027;
+  background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027);">
+    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'net:index' %}">Sg</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Netbooks
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% if perms.net.view_netbook %}
+              <a class="dropdown-item" href="{% url 'net:listar_netbooks' %}"
+                >Ver Netbooks</a
+              >
+              {% endif %} {% if perms.net.add_netbook %}
+              <a class="dropdown-item" href="{% url 'net:agregar_netbook' %}"
+                >Agregar Netbook</a
+              >
+              {% endif %}
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Escuelas
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% if perms.net.view_escuela %}
+              <a class="dropdown-item" href="{% url 'net:listar_escuelas' %}">Ver Escuelas</a>
+              {% endif %}
+              {% if perms.net.add_escuela %}
+              <a class="dropdown-item" href="{% url 'net:agregar_escuela' %}">Agregar Escuela</a>
+              {% endif %}
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Informes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% if perms.net.view_informe %}
+              <a class="dropdown-item" href="{% url 'net:listar_informes' %}">Ver Informes</a>
+              {% endif %}
+              {% if perms.net.add_informe %}
+              <a class="dropdown-item" href="{% url 'net:agregar_informe' %}">Agregar Informes</a>
+              {% endif %}
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Directivos
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% if perms.net.view_directivo %}
+              <a class="dropdown-item" href="{% url 'net:listar_directivos' %}">Ver Directivos</a>
+              {% endif %}
+              {% if perms.net.add_directivo %}
+              <a class="dropdown-item" href="{% url 'net:agregar_directivo' %}">Agregar Directivo</a>
+              {% endif %}
+            </div>
+          </li>
+          {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">Cerrar Sesión</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">@{{user.username}}</a>
+              </li class="nav-item">
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Iniciar Sesión</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'net:registro' %}">Registrarse</a>
+              </li>
+              {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+    <br />
+    <div class="container">{% block body %} {% endblock %}</div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+      crossorigin="anonymous"
+    ></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+
+    {% if messages %} {% for message in messages %}
+    <script>
+      swal.fire({
+        title: "Felicitaciones",
+        text: "{{message}}",
+        icon: "success",
+      });
+    </script>
+    {% endfor %} {% endif %}
+  </body>
+</html>

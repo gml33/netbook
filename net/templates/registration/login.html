@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'net/css/bootstrap.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'net/css/font-awesome.min.css' %}"
+    /><!-- 
+<link rel="stylesheet" href="{% static 'net/css/estilos.css' %}" />
+    -->
+    
+
+    <title>Ingresar</title>
+  </head>
+  <body
+    style="
+      background: #0f2027; /* fallback for old browsers */
+      background: -webkit-linear-gradient(
+        to right,
+        #2c5364,
+        #203a43,
+        #0f2027
+      ); /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(
+        to right,
+        #2c5364,
+        #203a43,
+        #0f2027
+      ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    "
+  >
+    <br /><br /><br />
+    {% load crispy_forms_tags%}
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6 offset-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h2>Ingresar Credenciales</h2>
+              <hr />
+              <form action="" method="post">
+                {% csrf_token %} {{form | crispy}}
+                <hr />
+                <a href="{% url 'net:index' %}">Ir al Inicio</a> |
+                <a href="{% url 'net:registro' %}">Registrarse</a>
+                <input
+                  type="submit"
+                  value="Ingresar"
+                  class="btn btn-success float-right"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

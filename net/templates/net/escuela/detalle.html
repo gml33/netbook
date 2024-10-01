@@ -1,0 +1,128 @@
+{% extends "net/layout.html" %} {% block body %} {% if escuela %}
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">Detalle de la Escuela</h3>
+      <h5 class="card-title">
+        Nombre: {{escuela.nombre}} - CUE: {{escuela.cue}} - CUISE:
+        {{escuela.cuise}} | Referente : {{escuela.referente.firstname}} {{escuela.referente.lastname}}
+      </h5>
+      <hr>
+        <div class="row">
+          <table class="table table-striped table-hover table-responsive-sm">
+            <tbody>
+              <tr>
+                <td>Nombre</td>
+                <td>{{escuela.nombre}}</td>
+              </tr>
+              <tr>
+                <td>CUE</td>
+                <td>{{escuela.cue}}</td>
+              </tr>
+              <tr>
+                <td>CUISE</td>
+                <td>{{escuela.cuise}}</td>
+              </tr>
+              <tr>
+                <td>Dirección</td>
+                <td>{{escuela.direccion}}</td>
+              </tr>
+              <tr>
+                <td>Localidad</td>
+                <td>{{escuela.localidad}}</td>
+              </tr>
+              <tr>
+                <td>Dependencia</td>
+                <td>{{escuela.dependencia}}</td>
+              </tr>
+              <tr>
+                <td>Directivo</td>
+                <td>{{directivo.nombre}} {{directivo.apellido}}</td>
+              </tr>
+              <tr>
+                <td>Teléfono</td>
+                <td>{{directivo.telefono}}</td>
+              </tr>
+              <tr>
+                <td>Netbooks pendientes de revisión</td>
+                <td>{{netbooks_pendientes}}</td>
+              </tr>
+              <tr>
+                <td>Netbooks funcionando correctamente</td>
+                <td>{{netbooks_ok}}</td>
+              </tr>
+              <tr>
+                <td>Netbooks que no estan funcionando</td>
+                <td>{{netbooks_no_funcionan}}</td>
+              </tr>
+              <tr>
+                <td>Netbooks bloqueadas</td>
+                <td>{{netbooks_bloqueadas}}</td>
+              </tr>
+              <tr>
+                <td>Netbooks pendientes de paquetes de migración</td>
+                <td>{{netbooks_migracion}}</td>
+              </tr>
+              <tr>
+                <td>Netbooks robadas</td>
+                <td>{{robadas}}</td>
+              </tr>
+            </tbody>
+          </table>          
+        </div>
+        <hr>
+        <div class="row">
+            <h3>Detalle</h3>
+            <p>{{escuela.detalle}}</p>
+        </div>
+        <hr>
+        {% if netbooks %}
+        <div class="row">
+          <h2>Netbooks pertenecientes a la escuela</h2>
+    <table class="table table-striped table-hover table-responsive-sm">
+      <tr>
+        <th>Identificador</th>
+        <th>Estado</th>
+        <th>Opciones</th>
+      </tr>      
+      {% for netbook in netbooks %}
+      <tr>
+        <td>{{netbook.identificador}}</td>
+        <td>{{netbook.estado}}</td>
+        <td>
+          <a
+            href="{% url 'net:detalle_netbook' netbook.id %}"
+            class="btn btn-success"
+            >Detalle</a
+          >
+          {% if perms.net.change_netbook %}
+          <a> - </a>
+          <a
+            href="{% url 'net:modificar_netbook' netbook.id %}"
+            class="btn btn-primary"
+            >Editar</a
+          >
+          {% endif %}
+          {% if perms.net.delete_netbook %}
+          <a> - </a>
+          <a
+            href="#"
+            class="btn btn-danger"
+            onclick="eliminarNetbook({{netbook.id}})"
+            >Eliminar</a
+          >
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+      {% else %}
+
+      {% endif %}
+    </table>
+        </div>
+        <hr />
+      <a href="{% url 'net:listar_escuelas' %}" class="btn btn-success">Volver</a>
+      </div>
+      
+    </div>
+  </div>
+{% endif %} {% endblock %}

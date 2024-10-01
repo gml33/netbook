@@ -1,0 +1,80 @@
+{% extends "net/layout.html" %} {% block body %} {% if netbook %}
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Detalle del equipo</h3>
+    <h5 class="card-title">
+      N° {{netbook.identificador}} - Serie: {{netbook.serie}} - Escuela:
+      {{netbook.escuela}} | Estado: {{netbook.estado}}
+    </h5>
+    <div class="row">
+      <table class="table table-striped table-hover table-responsive-sm">
+        <tbody>
+          <tr>
+            <td>Identificador</td>
+            <td>{{netbook.identificador}}</td>
+          </tr>
+          <tr>
+            <td>Serie</td>
+            <td>{{netbook.serie}}</td>
+          </tr>
+          <tr>
+            <td>Marca</td>
+            <td>{{netbook.marca}}</td>
+          </tr>
+          <tr>
+            <td>Modelo</td>
+            <td>{{netbook.modelo}}</td>
+          </tr>
+          <tr>
+            <td>Escuela a la cual pertenece</td>
+            <td>{{netbook.escuela}}</td>
+          </tr>
+          <tr>
+            <td>Estado de la pila</td>
+            <td>{{netbook.estado_pila}}</td>
+          </tr>
+          <tr>
+            <td>Arranques restantes</td>
+            <td>{{netbook.arranques}}</td>
+          </tr>
+          <tr>
+            <td>Fecha de expiración del certificado</td>
+            <td>{{netbook.fecha_expiracion}}</td>
+          </tr>
+          <tr>
+            <td>Special Number (sin ceros ni guiones)</td>
+            <td>{{netbook.sn}}</td>
+          </tr>
+          <tr>
+            <td>Hardware Id</td>
+            <td>{{netbook.hid}}</td>
+          </tr>
+          <tr>
+            <td>Marca de arranque</td>
+            <td>{{netbook.boottick}}</td>
+          </tr>
+          <tr>
+            <td>Estado del Hdd</td>
+            <td>{{netbook.estado_disco}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    {% if netbook.imagen1 %}
+    <div class="row">
+      <img
+        src="{{netbook.imagen1.url}}"
+        alt="foto del equipo"
+        class="rounded mx-auto d-block img-fluid"
+      />
+    </div>
+    {% else %} {% endif %}
+  </div>
+  <div>
+    <a href="{% url 'net:listar_netbooks' %}" class="btn btn-success"
+      >Volver</a
+    >
+  </div>
+</div>
+
+{% endif %} {% endblock %}

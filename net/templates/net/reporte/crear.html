@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'net/css/bootstrap.min.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'net/css/bootstrap.min.css.map' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'net/css/font-awesome.min.css' %}"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/all.min.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <title>Reporte</title>
+  </head>
+  <body>
+    <div class="container">
+      <center><h2>Reporte de Escuela</h2></center>
+      <h4>Fecha: {{fecha}}</h4>
+      <h4>Solicitante del informe: {{solicitante}}</h4>
+      <br />
+      <h5>Nombre de la Escuela: {{escuela.nombre}}</h5>
+      <h5>CUE: {{escuela.cue}}</h5>
+      <h5>Cuise: {{escuela.cuise}}</h5>
+      <h5>Dirección: {{escuela.direccion}}</h5>
+      <h5>Localidad: {{escuela.localidad}}</h5>
+      <br />
+      <h5>Directivo: {{directivo.nombre}} {{directivo.apellido}}</h5>
+      <h5>Telefono de Contacto: {{directivo.telefono}}</h5>
+      {% if escuela.detalle %}
+      <hr />
+      <h5>Detalle:</h5>
+      {{escuela.detalle}}
+      <hr />
+      {% else %} {% endif %} {% if netbooks %}
+      <hr />
+      <h2>Detalle de Equipos en la escuela</h2>
+      <br />
+      <table class="table table-striped table-hover table-responsive-sm">
+        <tbody>
+          <tr>
+            <td>Netbooks pendientes de revisión</td>
+            <td>{{netbooks_pendientes}}</td>
+          </tr>
+          <tr>
+            <td>Netbooks funcionando correctamente</td>
+            <td>{{netbooks_ok}}</td>
+          </tr>
+          <tr>
+            <td>Netbooks que no estan funcionando</td>
+            <td>{{netbooks_no_funcionan}}</td>
+          </tr>
+          <tr>
+            <td>Netbooks bloqueadas</td>
+            <td>{{netbooks_bloqueadas}}</td>
+          </tr>
+          <tr>
+            <td>Netbooks pendientes de paquetes de migración</td>
+            <td>{{netbooks_migracion}}</td>
+          </tr>
+          <tr>
+            <td>Netbooks robadas</td>
+            <td>{{robadas}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-striped table-hover table-responsive-sm">
+        <tr>
+          <th>Identificador</th>
+          <th>Serie</th>
+          <th>Marca y Modelo</th>
+          <th>SN</th>
+          <th>Hid</th>
+          <th>BootTick</th>
+          <th>Pila</th>
+          <th>Estado</th>
+          <th>Detalle</th>
+        </tr>
+        {% for netbook in netbooks %}
+        <tr>
+          <td>{{netbook.identificador}}</td>
+          <td>{{netbook.serie}}</td>
+          <td>{{netbook.marca}}-{{netbook.modelo}}</td>
+          <td>{{netbook.sn}}</td>
+          <td>{{netbook.hid}}</td>
+          <td>{{netbook.boottick}}</td>
+          <td>{{netbook.estado_pila}}</td>
+          <td>{{netbook.estado}}</td>
+          <td>{{netbook.detalle}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %} {% if netbook.imagen1 %}
+      <hr />
+      <h2>Imagenes de los equipos:</h2>
+      {% for netbook in netbooks %}
+      <div class="row">
+        <img
+          src="{{netbook.imagen1.url}}"
+          alt="foto del equipo"
+          class="rounded mx-auto d-block img-fluid"
+        />
+      </div>
+      {% endfor %} {% else %} {% endif %}
+
+      <hr />
+      {% if informes %}
+      <h2>Listado de Informes</h2>
+      <table class="table table-striped table-hover table-responsive-sm">
+        <tr>
+          <th>Fecha</th>
+          <th>Autor</th>
+          <th>detalle</th>
+        </tr>
+        {% for informe in informes %}
+        <tr>
+          <td>{{informe.fecha}}</td>
+          <td>{{informe.autor}}</td>
+          <td>{{informe.detalle}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+    </div>
+  </body>
+</html>

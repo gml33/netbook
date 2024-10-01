@@ -1,0 +1,28 @@
+{% extends "net/layout.html" %} {% block body %} {% load crispy_forms_tags %}
+<br /><br />
+<div class="row">
+  <div class="col-12 col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h2>Editar Escuela</h2>
+        <hr />
+        <form action="" method="post">
+          {% csrf_token %} {{form | crispy}}
+          <hr />
+          <div class="d-flex justify-content-end">
+            <a class="btn btn-success" href="{% url 'net:listar_escuelas' %}"
+              >Volver</a
+            >
+            &nbsp;
+            <input type="reset" value="Limpiar" class="btn btn-danger" />
+            &nbsp;
+            <input type="submit" value="Editar" class="btn btn-primary" />
+          </div>
+        </form>
+        {{mensaje}}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

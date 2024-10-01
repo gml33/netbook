@@ -1,0 +1,17 @@
+{% extends "net/layout.html" %} {% block body %}
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title">Detalle del Directivo</h3>
+      <h5 class="card-title">
+        Nombre: {{directivo.nombre}} {{directivo.apellido}} - DNI:
+        {{directivo.dni}} - Escuela:
+        {{directivo.escuela.cuise}}-{{directivo.escuela.nombre}}-{{directivo.escuela.localidad}}
+      </h5>
+      <a href="{% url 'net:listar_directivos' %}" class="btn btn-success"
+        >Volver</a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}

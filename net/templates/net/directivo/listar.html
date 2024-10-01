@@ -1,0 +1,68 @@
+{% extends "net/layout.html" %} {% block body %} {% load crispy_forms_tags %}
+{% if directivos %}
+
+<script>
+  function eliminarDirectivo(id) {
+    Swal.fire({
+      title: "Confirmar Operación",
+      text: "Esta acción no se puede deshacer",
+      icon: "question",
+      showCancelButton: true,
+    }).then(function (result) {
+      if (result.isConfirmed) {
+        window.location.href = "/eliminar-directivo/" + id + "/";
+      }
+    });
+  }
+</script>
+
+<div class="card">
+  <card class="card-body text-center">
+    <h2>Listado de Directivos</h2>
+    <hr />
+    <table class="table table-striped table-hover table-responsive-sm">
+      <tr>
+        <th>Nombre y Apellido</th>
+        <th>Contacto</th>
+        <th>Escuela</th>
+        <th>Opciones</th>
+      </tr>
+      {% for directivo in directivos %}
+      <tr>
+        <td>{{directivo.nombre}} {{directivo.apellido}}</td>
+        <td>tel: {{directivo.telefono}}</td>
+        <td>{{directivo.escuela.cuise}} - {{directivo.escuela.nombre}}</td>
+        <td>
+          <a
+            href="{% url 'net:detalle_directivo' directivo.id %}"
+            class="fas fa-eye"
+          ></a>
+          {% if perms.net.change_directivo %}
+          <a> - </a>
+          <a
+            href="{% url 'net:modificar_directivo' directivo.id %}"
+            class="fas fa-pen"
+          ></a>
+          {% endif %} {% if perms.net.delete_directivo %}
+          <a> - </a>
+          <a
+            href="#"
+            class="far fa-trash-alt"
+            onclick="eliminarDirectivo({{directivo.id}})"
+          ></a>
+
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </card>
+</div>
+
+{% else %}
+<div class="card">
+  <card class="card-body">
+    <h2>No hay Directivos registrados</h2>
+  </card>
+</div>
+{% endif %} {% endblock %}

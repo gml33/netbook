@@ -1,0 +1,26 @@
+{% extends "net/layout.html" %} {% block body %}
+
+<div class="card">
+  <div class="card-body">
+    <h3 class="card-title">Detalle del Informe</h3>
+    <h5 class="card-title">
+      Autor: {{informe.autor}} | Escuela:
+      {{informe.escuela}}
+    </h5>
+    <hr />
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="{{informe.foto}}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{informe.fecha}}</h5>
+        <p class="card-text">{{informe.detalle}}</p>
+        <a href="{% url 'net:listar_informes' %}" class="btn btn-primary">Volver</a>
+      </div>
+    </div>
+    <hr />
+    <a href="{% url 'net:listar_informes' %}" class="btn btn-success"
+      >Volver</a
+    >
+  </div>
+</div>
+
+{% endblock %}

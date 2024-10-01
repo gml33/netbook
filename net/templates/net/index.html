@@ -1,0 +1,78 @@
+{% extends "net/layout.html" %} {% block body %}
+
+<div class="card">
+  <div class="card-body">
+    <center>
+      <h2>Ultimas actividades</h2>
+    </center>
+    <h5>Total de actividades: {{total_actividades}}</h5>
+    <hr />
+    <table class="table table-striped table-hover table-responsive-sm">
+      <tr>
+        <th>Fecha</th>
+        <th>Autor</th>
+        <th>Tipo de actividad</th>
+        <th>Entidad</th>
+      </tr>
+      {% for actividad in actividades %}
+      <tr>
+        <td>{{actividad.fecha}}</td>
+        <td>{{actividad.autor}}</td>
+        <td>{{actividad.tipo_actividad}}</td>
+        <td>{{actividad.entidad}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  </div>
+  <hr>
+  <div class="card">
+    <div class="card-body">
+      <center>
+        <h2>Ultimas Escuelas Registradas</h2>
+      </center>
+      <h5>Total Escuelas registradas: {{total_escuelas}}</h5>
+      <hr />
+      <table class="table table-striped table-hover table-responsive-sm">
+        <tr>
+          <th>Nombre</th>
+          <th>Cuise</th>
+          <th>Dirección</th>
+        </tr>
+        {% for escuela in escuelas %}
+        <tr>
+          <td>{{escuela.nombre}}</td>
+          <td>{{escuela.cuise}}</td>
+          <td>{{escuela.direccion}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  <hr>
+  <div class="card">
+    <div class="card-body">
+      <h2 class="text-center">Ultimos Equipos Registrados</h2>
+<h5>
+  Registradas: {{total_netbooks}} | Pendientes de revisión:
+  {{netbooks_pendientes_de_revision}} | Robadas : {{netbooks_robadas}}
+</h5>
+<hr />
+<table class="table table-striped table-hover table-responsive-sm">
+  <tr>
+    <th>Identificador</th>
+    <th>Escuela</th>
+    <th>Estado</th>
+  </tr>
+  {% for netbook in netbooks %}
+  <tr>
+    <td>{{netbook.identificador}}</td>
+    <td>{{netbook.escuela}}</td>
+    <td>{{netbook.estado}}</td>
+  </tr>
+  {% endfor %}
+</table>
+</card>
+</div>
+
+{% endblock %}

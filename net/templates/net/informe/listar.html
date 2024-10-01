@@ -1,0 +1,61 @@
+{% extends "net/layout.html" %} {% block body %} {% load crispy_forms_tags %}
+{% if informes %}
+
+<script>
+  function eliminarInforme(id) {
+    Swal.fire({
+      icon: "question",
+      title: "Confirmar Operación",
+      text: "Esta acción no se puede deshacer",
+      showCancelButton: true,
+    }).then(function (result) {
+      if (result.isConfirmed) {
+        window.location.href = "/eliminar-informe/" + id + "/";
+      }
+    });
+  }
+</script>
+
+<div class="card">
+  <card class="card-body">
+    <h2>Listado de Informes</h2>
+    <hr />
+    <table class="table table-striped table-hover table-responsive-sm">
+      <tr>
+        <th>Fecha</th>
+        <th>Autor</th>
+        <th>Escuela</th>
+        <th>Opciones</th>
+      </tr>
+      {% for informe in informes %}
+      <tr>
+        <td>{{informe.fecha}}</td>
+        <td>{{informe.autor}}</td>
+        <td>{{informe.escuela}}</td>
+        <td>
+          <a
+            href="{% url 'net:detalle_informe' informe.id%}"
+            class="fas fa-eye"
+          ></a>
+          {% if perms.net.delete_informe %}
+          <a> - </a>
+          <a
+            href="#"
+            class="far fa-trash-alt"
+            onclick="eliminarInforme({{informe.id}})"
+          ></a>
+          {%endif%}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </card>
+</div>
+
+{% else %}
+<div class="card">
+  <card class="card-body">
+    <h2>No hay Informes registrados</h2>
+  </card>
+</div>
+{% endif %} {% endblock %}
